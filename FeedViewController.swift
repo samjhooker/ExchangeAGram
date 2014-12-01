@@ -14,10 +14,20 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var feedArray:[AnyObject] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        
+        // we need to request all the instance of FeedItem
+        let request = NSFetchRequest(entityName: "FeedItem")
+        //access instance app delegate
+        let appDelegate:AppDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
+        //access context (optional porperty of the app delegate)
+        let context:NSManagedObjectContext = appDelegate.managedObjectContext!
+        feedArray = context.executeFetchRequest(request, error: nil)!  //doesnt know what type it is returning therefore must use AnyObject when defining array.
+        //all feed item instances will be put into the feed array.
     }
 
     override func didReceiveMemoryWarning() {
@@ -74,7 +84,7 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         let imageData = UIImageJPEGRepresentation(image, 1.0)//converts the UIImage into JPG NSData instance (which is required for our FeedItem item)
         
         //COREDATA
-        let managedObjectContext = (UIApplication.sharedApplication().deleagte as AppDelegate).managedObjectContext // get managed object context from app delegate
+        let managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext // get managed object context from app delegate
         let entityDescription = NSEntityDescription.entityForName("FeedItem", inManagedObjectContext: managedObjectContext!) // more or less, creating an instance of FeedItem
         let feedItem = FeedItem(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext!)
         
@@ -97,12 +107,23 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return feedArray.count //number of all cells
     }
     
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell { //creates each instnace of the a cell.
+        
+        // creates a reuasbale cell (instance of FeedCell)
+        var cell:FeedCell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as FeedCell
+        
+        let thisItem = feedArray[indexPath.row] as FeedItem // finds the data needed
+        
+        cell.imageView.image = UIImage(data: thisItem.image)//have to convert back from data to image file
+        cell.captionLabel.text = thisItem.caption
+        
+        return cell
+        
+        
     }
     
 }
