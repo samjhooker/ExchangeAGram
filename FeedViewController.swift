@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MobileCoreServices
 
-class FeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class FeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate { //last 2 needed for camera
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -33,6 +34,25 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         // Pass the selected object to the new view controller.
     }
     */
+    
+    @IBAction func snapBarButtonItemTapped(sender: UIBarButtonItem) { //camera button pressed
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera){ //checks if camera is availiable
+            var cameraController = UIImagePickerController() //creates instance of media object
+            cameraController.delegate = self
+            cameraController.sourceType = UIImagePickerControllerSourceType.Camera //selects the media object as a camera
+            
+            let mediaTypes:[AnyObject] = [kUTTypeImage] // abstract type, specifing image data
+            cameraController.mediaTypes = mediaTypes // media type is an image
+            
+            cameraController.allowsEditing  = false
+            
+            self.presentViewController(cameraController, animated: true, completion: nil)// present the camera (actually opens it)
+            
+        }
+    }
+    
+    
+    
     
     //UICollectionViewDataSource
     
