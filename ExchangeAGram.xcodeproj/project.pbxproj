@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		7EA6726C1A2D202200BF1655 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA6726B1A2D202200BF1655 /* AppDelegate.swift */; };
 		7EA6726F1A2D202200BF1655 /* ExchangeAGram.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7EA6726D1A2D202200BF1655 /* ExchangeAGram.xcdatamodeld */; };
-		7EA672711A2D202200BF1655 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA672701A2D202200BF1655 /* ViewController.swift */; };
 		7EA672741A2D202200BF1655 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EA672721A2D202200BF1655 /* Main.storyboard */; };
 		7EA672761A2D202200BF1655 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EA672751A2D202200BF1655 /* Images.xcassets */; };
 		7EA672791A2D202200BF1655 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EA672771A2D202200BF1655 /* LaunchScreen.xib */; };
 		7EA672851A2D202200BF1655 /* ExchangeAGramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA672841A2D202200BF1655 /* ExchangeAGramTests.swift */; };
+		7EA6728F1A2D216400BF1655 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA6728E1A2D216400BF1655 /* FeedViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,13 +31,13 @@
 		7EA6726A1A2D202200BF1655 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7EA6726B1A2D202200BF1655 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7EA6726E1A2D202200BF1655 /* ExchangeAGram.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ExchangeAGram.xcdatamodel; sourceTree = "<group>"; };
-		7EA672701A2D202200BF1655 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7EA672731A2D202200BF1655 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7EA672751A2D202200BF1655 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7EA672781A2D202200BF1655 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		7EA6727E1A2D202200BF1655 /* ExchangeAGramTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExchangeAGramTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EA672831A2D202200BF1655 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7EA672841A2D202200BF1655 /* ExchangeAGramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeAGramTests.swift; sourceTree = "<group>"; };
+		7EA6728E1A2D216400BF1655 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedViewController.swift; path = ../FeedViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				7EA6726B1A2D202200BF1655 /* AppDelegate.swift */,
-				7EA672701A2D202200BF1655 /* ViewController.swift */,
+				7EA6728E1A2D216400BF1655 /* FeedViewController.swift */,
 				7EA672721A2D202200BF1655 /* Main.storyboard */,
 				7EA672751A2D202200BF1655 /* Images.xcassets */,
 				7EA672771A2D202200BF1655 /* LaunchScreen.xib */,
@@ -215,8 +215,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EA672711A2D202200BF1655 /* ViewController.swift in Sources */,
 				7EA6726C1A2D202200BF1655 /* AppDelegate.swift in Sources */,
+				7EA6728F1A2D216400BF1655 /* FeedViewController.swift in Sources */,
 				7EA6726F1A2D202200BF1655 /* ExchangeAGram.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
