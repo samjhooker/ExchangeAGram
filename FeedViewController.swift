@@ -8,6 +8,7 @@
 
 import UIKit
 import MobileCoreServices
+import CoreData
 
 class FeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate { //last 2 needed for camera
 
@@ -26,14 +27,14 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
     
 
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
+      ___ __ _ _ __ ___   ___ _ __ __ _
+     / __/ _` | '_ ` _ \ / _ \ '__/ _` |
+    | (_| (_| | | | | | |  __/ | | (_| |
+     \___\__,_|_| |_| |_|\___|_|  \__,_|
+    
     */
+    
+    
     
     @IBAction func snapBarButtonItemTapped(sender: UIBarButtonItem) { //camera button pressed
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera){ //checks if camera is availiable
@@ -49,6 +50,41 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
             self.presentViewController(cameraController, animated: true, completion: nil)// present the camera (actually opens it)
             
         }
+        else if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary){
+            var photoLibraryController = UIImagePickerController()
+            photoLibraryController.delegate = self
+            photoLibraryController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            let mediaTypes:[AnyObject] = [kUTTypeImage]
+            photoLibraryController.mediaTypes = mediaTypes
+            photoLibraryController.allowsEditing = false
+            self.presentViewController(photoLibraryController, animated: true, completion: nil)
+        }
+        else{
+            var alertView = UIAlertController(title: "Alert", message: "your device dowes not support camera or photo library", preferredStyle: UIAlertControllerStyle.Alert)
+            alertView.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alertView, animated: true, completion: nil)
+        }
+    }
+    
+    ///UIImagePickerController Delagate
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) { //finish picking image
+        
+        let image = info[UIImagePickerControllerOriginalImage] as UIImage // this gets the image as it passed in through the 'info' argument
+        let imageData = UIImageJPEGRepresentation(image, 1.0)//converts the UIImage into JPG NSData instance (which is required for our FeedItem item)
+        
+        //COREDATA
+        let managedObjectContext = (UIApplication.sharedApplication().deleagte as AppDelegate).managedObjectContext // get managed object context from app delegate
+        let entityDescription = NSEntityDescription.entityForName("FeedItem", inManagedObjectContext: managedObjectContext!) // more or less, creating an instance of FeedItem
+        let feedItem = FeedItem(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext!)
+        
+        feedItem.image = imageData
+        feedItem.caption = "test caption"
+        
+        (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
+        
+        self.dismissViewControllerAnimated(true, completion: nil)//dismisses image picker controller
+    
     }
     
     
