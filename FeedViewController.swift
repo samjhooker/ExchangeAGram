@@ -93,8 +93,12 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
         
+        
+        feedArray.append(feedItem)
+        
         self.dismissViewControllerAnimated(true, completion: nil)//dismisses image picker controller
-    
+        
+        self.collectionView.reloadData()
     }
     
     
@@ -124,6 +128,17 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         return cell
         
         
+    }
+    
+    //UICollectionViewDelegate
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) { //cell tapped on
+        let thisItem = feedArray[indexPath.row] as FeedItem //this item is the item tapped on
+        
+        var filterVc = FilterViewController()
+        filterVc.thisFeedItem = thisItem
+        
+        self.navigationController?.pushViewController(filterVc, animated: false)
     }
     
 }
