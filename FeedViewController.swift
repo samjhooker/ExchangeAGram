@@ -135,10 +135,10 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) { //cell tapped on
         let thisItem = feedArray[indexPath.row] as FeedItem //this item is the item tapped on
         
-        var filterVc = FilterViewController()
+        var filterVc = FilterViewController() //creates an instance of the filter View Controller
         filterVc.thisFeedItem = thisItem
         
-        self.navigationController?.pushViewController(filterVc, animated: false)
+        self.navigationController?.pushViewController(filterVc, animated: false) //pushes view controller
     }
     
 }
