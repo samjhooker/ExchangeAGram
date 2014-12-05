@@ -19,6 +19,7 @@
 		7EA672971A2FBF4900BF1655 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA672961A2FBF4900BF1655 /* FilterViewController.swift */; };
 		7EA672991A2FC47600BF1655 /* filterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA672981A2FC47600BF1655 /* filterCell.swift */; };
 		7EA83F761A31273D004B922F /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA83F751A31273D004B922F /* FeedItem.swift */; };
+		7EA83F781A31405D004B922F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA83F771A31405D004B922F /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		7EA672961A2FBF4900BF1655 /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		7EA672981A2FC47600BF1655 /* filterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = filterCell.swift; sourceTree = "<group>"; };
 		7EA83F751A31273D004B922F /* FeedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedItem.swift; path = ../FeedItem.swift; sourceTree = "<group>"; };
+		7EA83F771A31405D004B922F /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 				7EA6726B1A2D202200BF1655 /* AppDelegate.swift */,
 				7EA6728E1A2D216400BF1655 /* FeedViewController.swift */,
 				7EA672961A2FBF4900BF1655 /* FilterViewController.swift */,
+				7EA83F771A31405D004B922F /* ProfileViewController.swift */,
 				7EA672901A2D238000BF1655 /* FeedCell.swift */,
 				7EA672981A2FC47600BF1655 /* filterCell.swift */,
 				7EA672721A2D202200BF1655 /* Main.storyboard */,
@@ -237,6 +240,7 @@
 				7EA6728F1A2D216400BF1655 /* FeedViewController.swift in Sources */,
 				7EA672991A2FC47600BF1655 /* filterCell.swift in Sources */,
 				7EA83F761A31273D004B922F /* FeedItem.swift in Sources */,
+				7EA83F781A31405D004B922F /* ProfileViewController.swift in Sources */,
 				7EA6726F1A2D202200BF1655 /* ExchangeAGram.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

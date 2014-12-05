@@ -18,8 +18,17 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         
-        
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    override func viewDidAppear(animated: Bool) {
         // we need to request all the instance of FeedItem
         let request = NSFetchRequest(entityName: "FeedItem")
         //access instance app delegate
@@ -28,11 +37,7 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         let context:NSManagedObjectContext = appDelegate.managedObjectContext!
         feedArray = context.executeFetchRequest(request, error: nil)!  //doesnt know what type it is returning therefore must use AnyObject when defining array.
         //all feed item instances will be put into the feed array.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        collectionView.reloadData()
     }
     
 

@@ -69,7 +69,7 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         
         dispatch_async(filterQueue, { () -> Void in //filters image on a seperate thread
             
-            var filterImage = self.getCachedImage(indexPath)
+            var filterImage = self.getCachedImage(indexPath.row)
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in //when complete, move to main thread and apply image
                 cell.imageView.image = filterImage
@@ -83,6 +83,27 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         
         return cell
     }
+    
+    
+    //UICollectionViewDelegate
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) { //item selected
+        
+        let filterImage = self.filteredImageFromImage(self.thisFeedItem.image, filter: self.filters[indexPath.row]) //renders full image
+        
+        let imageData = UIImageJPEGRepresentation(filterImage, 1.0) //creates UIImage
+        self.thisFeedItem.image = imageData
+        // the nice thing about core data is that we can change the instanceof this data at my time (we still must save)
+        let thumbnailData = UIImageJPEGRepresentation(filterImage, 0.1)
+        self.thisFeedItem.thumbnail = thumbnailData
+        
+        //save the app delegate to save coredata
+        (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
+        
+        self.navigationController?.popToRootViewControllerAnimated(true)//pops VC
+    }
+    
+    
     
     //helper function
     
@@ -155,10 +176,11 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
             let image = filteredImageFromImage(data, filter: filter) //creates a filter
             UIImageJPEGRepresentation(image, 1.0).writeToFile(uniquePath, atomically: true) //saves the Jpeg within a cache
             
+        }
     }
         
         
-    func getCachedImage (imageNumber: Int) -> UIImage {
+    func getCachedImage(imageNumber:Int) -> UIImage {
         let fileName = "\(imageNumber)"
         let uniquePath = tmp.stringByAppendingPathComponent(fileName) //kinds like retriebving hash slot in hashtable
         var image:UIImage
@@ -170,7 +192,8 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
             image = UIImage(contentsOfFile: uniquePath)!
         }
         return image
-    }
+    
+    
         
     }
 
