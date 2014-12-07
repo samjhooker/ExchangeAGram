@@ -22,7 +22,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // these are the default cache values, can be changed for a specific use case.
         NSURLCache.setSharedURLCache(cache) // cashe setup
         
+        
+        FBLoginView.self
+        FBProfilePictureView.self
+        
+        
         return true
+    }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        var wasHandled:Bool = FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication)
+        return wasHandled //allows app to open again after login credentials confirmed
     }
     
     

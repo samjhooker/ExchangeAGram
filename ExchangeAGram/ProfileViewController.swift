@@ -8,16 +8,20 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, FBLoginViewDelegate { //have to add FBloginViewDelegate for FB functions to work
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var fbLoginView: FBLoginView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        self.fbLoginView.delegate = self // when the callback messages are called, they are retuned to the profile VC instance.
+        self.fbLoginView.readPermissions = ["public_profile", "publish_actions"]//shows user what info we are stealing
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,14 +30,38 @@ class ProfileViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    
+    //FACEBOOK functions //these are the 4 login facebook function from the deleagte class
+    
+    func loginViewShowingLoggedInUser(loginView: FBLoginView!) { //while user fully logged in
+        profileImageView.hidden = false
+        nameLabel.hidden = false
     }
-    */
-
+    
+    func loginViewFetchedUserInfo(loginView: FBLoginView!, user: FBGraphUser!) {//info got whilst logging in
+        
+        println(user)
+        
+        nameLabel.text = user.name
+        
+        //have to acceess image through URL
+        let userImageURL = "htts://graph.facebook.com/\(user.objectID)/picture?type=small"
+        let url = NSURL(string: userImageURL)
+        let imageData = NSData(contentsOfURL: url!)
+        let image = UIImage(data: imageData!)
+        
+        profileImageView.image = image
+    
+        
+        
+    }
+    
+    func loginViewShowingLoggedOutUser(loginView: FBLoginView!) { //  logged out
+        profileImageView.hidden = true
+        nameLabel.hidden = true
+    }
+    func loginView(loginView: FBLoginView!, handleError error: NSError!) { //error while login
+        println("error: \(error.localizedDescription)")
+    }
 }
