@@ -40,6 +40,9 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         collectionView.reloadData()
     }
     
+    @IBAction func profileTapped(sender: UIBarButtonItem) {
+        self.performSegueWithIdentifier("profileSegue", sender: nil)
+    }
 
     /*
       ___ __ _ _ __ ___   ___ _ __ __ _

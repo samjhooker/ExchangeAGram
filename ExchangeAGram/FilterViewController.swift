@@ -89,18 +89,9 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) { //item selected
         
-        let filterImage = self.filteredImageFromImage(self.thisFeedItem.image, filter: self.filters[indexPath.row]) //renders full image
         
-        let imageData = UIImageJPEGRepresentation(filterImage, 1.0) //creates UIImage
-        self.thisFeedItem.image = imageData
-        // the nice thing about core data is that we can change the instanceof this data at my time (we still must save)
-        let thumbnailData = UIImageJPEGRepresentation(filterImage, 0.1)
-        self.thisFeedItem.thumbnail = thumbnailData
         
-        //save the app delegate to save coredata
-        (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
-        
-        self.navigationController?.popToRootViewControllerAnimated(true)//pops VC
+        createUIAlertController(indexPath)
     }
     
     
@@ -155,6 +146,100 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         
         return finalImage!
     }
+    
+    
+    
+    //UIAlertController Helper Functions
+    
+    func createUIAlertController(indexPath:NSIndexPath){
+        let alert = UIAlertController(title: "Photo Options", message: "Please chose an option", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alert.addTextFieldWithConfigurationHandler { (textField) -> Void in //adding a textfield, textField, within the alert controller
+            textField.placeholder = "Add Caption"
+            textField.secureTextEntry = false
+        }
+        
+        var text:String
+        let textField = alert.textFields![0] as UITextField     //specifies the first (and only) text field within the UIALert
+        
+        text = textField.text
+        
+        
+        //destructive alert is big and red
+        let photoAction = UIAlertAction(title: "Post Photo to facebook with caption", style: UIAlertActionStyle.Destructive) { (UIAlertAction) -> Void in
+            //post to facebook code here
+            
+            text = textField.text
+            self.shareToFacebook(indexPath)
+            self.saveFilterToCoreData(indexPath, caption: text)
+        }
+        
+        alert.addAction(photoAction)
+        
+        // default alert is normal and blue
+        let saveFilterAction = UIAlertAction(title: "Save filter but don't post", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
+            //save code here
+            
+            text = textField.text
+            self.saveFilterToCoreData(indexPath, caption: text)
+        }
+        
+        alert.addAction(saveFilterAction)
+        
+        // cancel alert is blue and bold
+        let cancelAction = UIAlertAction(title: "Select another filter", style: UIAlertActionStyle.Cancel) { (UIAlertAction) -> Void in
+            //none
+        }
+        
+        alert.addAction(cancelAction)
+        
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    
+    
+    func saveFilterToCoreData(indexPath:NSIndexPath, caption:String){
+        let filterImage = self.filteredImageFromImage(self.thisFeedItem.image, filter: self.filters[indexPath.row]) //renders full image
+        
+        let imageData = UIImageJPEGRepresentation(filterImage, 1.0) //creates UIImage
+        self.thisFeedItem.image = imageData
+        // the nice thing about core data is that we can change the instanceof this data at my time (we still must save)
+        let thumbnailData = UIImageJPEGRepresentation(filterImage, 0.1)
+        self.thisFeedItem.thumbnail = thumbnailData
+        
+        self.thisFeedItem.caption = caption
+        
+        //save the app delegate to save coredata
+        (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
+        
+        self.navigationController?.popToRootViewControllerAnimated(true)//pops VC
+
+    }
+    
+    
+    func shareToFacebook(indexPath:NSIndexPath){
+        let filterImage = self.filteredImageFromImage(self.thisFeedItem.image, filter: self.filters[indexPath.row]) //renders full image
+        
+        //facebook wants an NSArray therefore we must passup our image as an NSarray
+        
+        let photos:NSArray = [filterImage]
+        var params = FBPhotoParams()
+        params.photos = photos
+        
+        FBDialogs.presentShareDialogWithPhotoParams(params, clientState: nil) { (call, result, error) -> Void in
+            
+            if result? != nil{
+                println(result)
+            }
+            else{
+                println(error)
+            }
+        }
+        
+    }
+    
+    
     
     
     //////////////////////////      CACHE       /////////////////////////////
