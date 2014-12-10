@@ -11,15 +11,26 @@ import MobileCoreServices
 import CoreData
 import MapKit
 
-class FeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate { //last 2 needed for camera
-
+class FeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate {
+                                            //for UICollectionView                                    // for image picker (ie, camera or gallery)                   // for location services
     @IBOutlet weak var collectionView: UICollectionView!
     
     var feedArray:[AnyObject] = []
     
+    var locationManager: CLLocationManager!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest //best accuracy possible
+        
+        locationManager.requestAlwaysAuthorization() // gives popup to ask for location, must be setup in info.plist
+        
+        locationManager.distanceFilter = 100.0 //distance changed before location update
+        locationManager.startUpdatingLocation()
         
     }
 
@@ -102,6 +113,9 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         feedItem.caption = "test caption"
         feedItem.thumbnail = thumbnailData
         
+        feedItem.latitude = locationManager.location.coordinate.latitude
+        feedItem.longitude = locationManager.location.coordinate.longitude
+        
         (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
         
         
@@ -151,5 +165,24 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         self.navigationController?.pushViewController(filterVc, animated: false) //pushes view controller
     }
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////       CLLocationManagerDelegate   ////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        println("locations = \(locations)")
+    }
+    
+    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+        if error.code != CLError.LocationUnknown.rawValue{
+            self.locationManager.stopUpdatingLocation()
+        }
+    }
+    
+    
+    
+    
     
 }

@@ -30,7 +30,8 @@ class ProfileViewController: UIViewController, FBLoginViewDelegate { //have to a
     }
     
 
-    @IBAction func mapViewButtonTapped(sender: AnyObject) {
+    @IBAction func mapViewButtonTapped(sender: UIButton) {
+        performSegueWithIdentifier("mapSegue", sender: nil)
     }
     
     
