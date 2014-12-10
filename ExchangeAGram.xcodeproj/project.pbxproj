@@ -21,6 +21,7 @@
 		7EA83F761A31273D004B922F /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA83F751A31273D004B922F /* FeedItem.swift */; };
 		7EA83F781A31405D004B922F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA83F771A31405D004B922F /* ProfileViewController.swift */; };
 		7EA83F7A1A350B56004B922F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EA83F791A350B56004B922F /* FacebookSDK.framework */; };
+		7EA83F7D1A380310004B922F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA83F7C1A380310004B922F /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		7EA83F771A31405D004B922F /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7EA83F791A350B56004B922F /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		7EA83F7B1A350C6D004B922F /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		7EA83F7C1A380310004B922F /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				7EA6728E1A2D216400BF1655 /* FeedViewController.swift */,
 				7EA672961A2FBF4900BF1655 /* FilterViewController.swift */,
 				7EA83F771A31405D004B922F /* ProfileViewController.swift */,
+				7EA83F7C1A380310004B922F /* MapViewController.swift */,
 				7EA672901A2D238000BF1655 /* FeedCell.swift */,
 				7EA672981A2FC47600BF1655 /* filterCell.swift */,
 				7EA83F7B1A350C6D004B922F /* Bridging-Header.h */,
@@ -244,6 +247,7 @@
 				7EA6726C1A2D202200BF1655 /* AppDelegate.swift in Sources */,
 				7EA672911A2D238000BF1655 /* FeedCell.swift in Sources */,
 				7EA6728F1A2D216400BF1655 /* FeedViewController.swift in Sources */,
+				7EA83F7D1A380310004B922F /* MapViewController.swift in Sources */,
 				7EA672991A2FC47600BF1655 /* filterCell.swift in Sources */,
 				7EA83F761A31273D004B922F /* FeedItem.swift in Sources */,
 				7EA83F781A31405D004B922F /* ProfileViewController.swift in Sources */,

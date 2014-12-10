@@ -30,6 +30,8 @@ class ProfileViewController: UIViewController, FBLoginViewDelegate { //have to a
     }
     
 
+    @IBAction func mapViewButtonTapped(sender: AnyObject) {
+    }
     
     
     //FACEBOOK functions //these are the 4 login facebook function from the deleagte class
