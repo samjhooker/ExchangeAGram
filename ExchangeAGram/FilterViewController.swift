@@ -25,10 +25,13 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
     let tmp = NSTemporaryDirectory() //path of temporary directory that will auto clear.
     
     
+    
     override func viewDidLoad() { //we shall code in the entire UI instead of using storyboard
         super.viewDidLoad()
+        
 
         // Do any additional setup after loading the view.
+        
         
     
         
@@ -251,7 +254,8 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     
     func cacheImage(imageNumber:Int){
-        let fileName = "\(imageNumber)"
+
+        let fileName = "\(thisFeedItem.uniqueID)\(imageNumber)"
         let uniquePath = tmp.stringByAppendingPathComponent(fileName) //unique file path to hash data to
         
         if !NSFileManager.defaultManager().fileExistsAtPath(fileName){ //if file doesnt exist at file path, generate filter
@@ -266,13 +270,14 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         
         
     func getCachedImage(imageNumber:Int) -> UIImage {
-        let fileName = "\(imageNumber)"
-        let uniquePath = tmp.stringByAppendingPathComponent(fileName) //kinds like retriebving hash slot in hashtable
+        
+        let fileName = "\(thisFeedItem.uniqueID)\(imageNumber)"
+        let uniquePath = tmp.stringByAppendingPathComponent(fileName) //kinds like retrieving hash slot in hashtable
         var image:UIImage
         
         if NSFileManager.defaultManager().fileExistsAtPath(uniquePath) {
             image = UIImage(contentsOfFile: uniquePath)!
-        } else { //if file not found, use previous function to create one wit this hash
+        } else { //if file not found, use previous function to create one with this hash key
             self.cacheImage(imageNumber)
             image = UIImage(contentsOfFile: uniquePath)!
         }

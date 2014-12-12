@@ -2,7 +2,7 @@
 //  FeedItem.swift
 //  ExchangeAGram
 //
-//  Created by Samuel Hooker on 10/12/14.
+//  Created by Samuel Hooker on 12/12/14.
 //  Copyright (c) 2014 Jocus Interactive. All rights reserved.
 //
 
@@ -15,8 +15,10 @@ class FeedItem: NSManagedObject {
 
     @NSManaged var caption: String
     @NSManaged var image: NSData
-    @NSManaged var thumbnail: NSData
     @NSManaged var latitude: NSNumber
     @NSManaged var longitude: NSNumber
+    @NSManaged var thumbnail: NSData
+    @NSManaged var uniqueID: String
+    @NSManaged var filtered: NSNumber
 
 }
