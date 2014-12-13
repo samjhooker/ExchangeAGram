@@ -32,6 +32,8 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         locationManager.distanceFilter = 100.0 //distance changed before location update
         locationManager.startUpdatingLocation()
         
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,6 +52,8 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         feedArray = context.executeFetchRequest(request, error: nil)!  //doesnt know what type it is returning therefore must use AnyObject when defining array.
         //all feed item instances will be put into the feed array.
         collectionView.reloadData()
+        
+        
     }
     
     @IBAction func profileTapped(sender: UIBarButtonItem) {
@@ -121,8 +125,10 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
             println("No location available")
         }
         
+        
         let UUID = NSUUID().UUIDString //apple with generate a uniqye string ID automatically
         feedItem.uniqueID = UUID //gets set as the ID for the item
+        //println(feedItem.uniqueID)
         
         
         (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()

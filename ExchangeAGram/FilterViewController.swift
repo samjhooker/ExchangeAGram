@@ -271,13 +271,15 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         
     func getCachedImage(imageNumber:Int) -> UIImage {
         
+        
+        
         let fileName = "\(thisFeedItem.uniqueID)\(imageNumber)"
         let uniquePath = tmp.stringByAppendingPathComponent(fileName) //kinds like retrieving hash slot in hashtable
         var image:UIImage
         
         if NSFileManager.defaultManager().fileExistsAtPath(uniquePath) {
             image = UIImage(contentsOfFile: uniquePath)!
-        } else { //if file not found, use previous function to create one with this hash key
+        } else { //if file not found, use previous function to create one with this hash
             self.cacheImage(imageNumber)
             image = UIImage(contentsOfFile: uniquePath)!
         }
