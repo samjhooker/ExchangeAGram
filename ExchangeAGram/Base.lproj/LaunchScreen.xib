@@ -10,11 +10,17 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="SplashScreen" translatesAutoresizingMaskIntoConstraints="NO" id="P0F-jr-73v">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashScreen" translatesAutoresizingMaskIntoConstraints="NO" id="P0F-jr-73v">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="P0F-jr-73v" secondAttribute="bottom" id="HHc-en-lYc"/>
+                <constraint firstItem="P0F-jr-73v" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="NCB-Dq-0DD"/>
+                <constraint firstAttribute="trailing" secondItem="P0F-jr-73v" secondAttribute="trailing" id="WZ7-h3-b58"/>
+                <constraint firstItem="P0F-jr-73v" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="aij-hx-iPs"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="548" y="455"/>
